@@ -1,0 +1,151 @@
+/* オーバーレイ */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--color-overlay);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-4);
+  opacity: 0;
+  animation: fadeIn var(--transition-base) forwards;
+}
+
+/* モーダル本体 */
+.modal {
+  background-color: var(--color-layer-1);
+  border-radius: var(--radius-xl);
+  width: 100%;
+  overflow-y: auto;
+  position: relative;
+  padding: var(--spacing-10);
+}
+
+/* アニメーションタイプ: スケール (デフォルト) */
+.modal.scale {
+  transform: scale(0.95);
+  opacity: 0;
+  animation: modalScaleIn var(--transition-base) forwards 0.1s;
+}
+
+/* アニメーションタイプ: スライドアップ */
+.modal.slide-up {
+  transform: translateY(30px);
+  opacity: 0;
+  animation: modalSlideUp var(--transition-base) forwards 0.1s;
+}
+
+/* アニメーションタイプ: スライドダウン */
+.modal.slide-down {
+  transform: translateY(-30px);
+  opacity: 0;
+  animation: modalSlideDown var(--transition-base) forwards 0.1s;
+}
+
+/* アニメーションタイプ: フェード */
+.modal.fade {
+  opacity: 0;
+  animation: modalFadeIn var(--transition-base) forwards 0.1s;
+}
+
+/* 閉じるボタン */
+.closeButton {
+  position: absolute;
+  top: var(--spacing-4);
+  right: var(--spacing-4);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-2);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-label);
+  transition: all var(--transition-fast);
+  z-index: 10;
+}
+
+.closeButton:hover {
+  background-color: var(--color-layer-2);
+  color: var(--color-text-default);
+  transform: scale(1.1);
+}
+
+.closeButton:active {
+  transform: scale(0.95);
+}
+
+/* アニメーション定義 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 640px) {
+  .overlay {
+    padding: var(--spacing-2);
+  }
+
+  .modal {
+    padding: var(--spacing-4);
+    max-height: 95vh !important;
+  }
+
+  .closeButton {
+    top: var(--spacing-2);
+    right: var(--spacing-2);
+  }
+}

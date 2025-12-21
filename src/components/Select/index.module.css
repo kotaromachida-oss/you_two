@@ -1,0 +1,17 @@
+.selectWrapper {
+  display: inline-block;
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+
+  > select {
+    appearance: none;
+    padding: var(--spacing-2);
+    border: none;
+    border-radius: var(--radius-sm);
+    width: 100%;
+    font-size: var(--font-size-sm);
+    font-weight: 400;
+    line-height: 1.71;
+  }
+}

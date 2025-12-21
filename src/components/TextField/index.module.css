@@ -1,0 +1,27 @@
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-2);
+  border: 1px var(--color-border) solid;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-layer-1);
+
+  > input {
+    width: 100%;
+    line-height: 1.71em;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-default);
+    border: none;
+    outline: none;
+    background-color: transparent;
+  }
+}
+
+.prefixIcon {
+  color: var(--color-text-label);
+  >svg {
+    vertical-align: bottom;
+  }
+}
+  

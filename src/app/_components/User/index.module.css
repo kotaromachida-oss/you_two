@@ -1,0 +1,17 @@
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-10);
+}
+
+.ageList {
+  display: flex;
+  gap: var(--spacing-4);
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: center;
+}

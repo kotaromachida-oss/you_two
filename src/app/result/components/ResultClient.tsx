@@ -1,0 +1,106 @@
+'use client';
+
+import Card from '@/components/Card';
+import Link from 'next/link';
+import styles from './ResultModal.module.css';
+import Tag from '@/components/Tag';
+import Button from '@/components/Button';
+import { useRouter } from 'next/navigation';
+import ResultModal from './ResultModal';
+import { DeviationValueRange } from '@/lib/scoring-tables';
+import { getRankInfo } from '@/lib/scoring-engine';
+
+
+export default function ResultClient({ decodedData }: { decodedData: { userAgeGroup: string; totalScore: number } }) {
+
+  const router = useRouter();
+  const deviation = getRankInfo(decodedData.totalScore);
+  if (!deviation) {
+    router.replace('/');
+    return <></>;
+  }
+
+  return (
+    <>
+      {40 <= deviation.min && <ResultModal deviation={deviation} userAgeGroup={decodedData.userAgeGroup} />}
+      <Card>
+        <div>
+          <div className={styles.header}>
+            <h1>パワーカップル偏差値</h1>
+            <h2 className={styles.deviationValue}>{deviation.deviation}</h2>
+          </div>
+
+          <div className={styles.tagGroup}>
+            <Tag size="sm">20代後半の評価</Tag>
+          </div>
+
+          <div className={styles.gaugeBlock}>
+            <p className={styles.guageTitle}>全体の中でのあなたの位置</p>
+            <div className={styles.guageContent}>
+              <div style={{textAlign: 'center'}}>
+                <span className={styles.gaugeScore}>あなた</span>
+              </div>
+              <ul className={styles.guageGradations}>
+                <li>10</li>
+                <li>15</li>
+                <li>20</li>
+                <li>25</li>
+                <li>30</li>
+                <li>35</li>
+                <li>40</li>
+                <li>45</li>
+                <li>50</li>
+                <li>55</li>
+                <li>60</li>
+                <li>65</li>
+                <li>70</li>
+                <li>75</li>
+                <li>80</li>
+                <li>85</li>
+                <li>90</li>
+                <li>95</li>
+                <li>100</li>
+                <li>105</li>
+                <li>110</li>
+                <li>115</li>
+                <li>120</li>
+                <li>125</li>
+                <li>130</li>
+                <li>135</li>
+                <li>140</li>
+                <li>145</li>
+                <li>150</li>
+                <li>155</li>
+                <li>160</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className={styles.commentBlock}>
+            <p>{deviation.comment}</p>
+          </div>
+
+          <div className={styles.shareButtonWrapper}>
+            <button className={styles.shareButton}>
+              <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clipPath="url(#clip0_76_71)">
+                  <path d="M9.52217 6.92379L15.4785 0H14.0671L8.89516 6.01183L4.76437 0H0L6.24656 9.09095L0 16.3516H1.41155L6.87321 10.0029L11.2356 16.3516H16L9.52183 6.92379H9.52217ZM7.58887 9.17104L6.95596 8.26579L1.92015 1.06259H4.0882L8.15216 6.8758L8.78507 7.78105L14.0677 15.3373H11.8997L7.58887 9.17139V9.17104Z" fill="white"/>
+                </g>
+                <defs>
+                  <clipPath id="clip0_76_71">
+                    <rect width="16" height="16.36" fill="white"/>
+                  </clipPath>
+                </defs>
+              </svg>
+              <span>シェアする</span>
+            </button>
+            <Link href="/">
+              <Button variant="secondary">もう一度診断する</Button>
+            </Link>
+          </div>
+
+        </div>
+      </Card>
+    </>
+  );
+}

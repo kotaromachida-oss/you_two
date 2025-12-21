@@ -1,0 +1,201 @@
+.container {
+  min-height: 100vh;
+  padding: var(--spacing-8) 0;
+  background-color: var(--color-gray-50);
+  background-image: 
+    radial-gradient(at 50% 0%, rgba(212, 175, 55, 0.1) 0px, transparent 60%);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 600px;
+  padding: 0 var(--spacing-4);
+}
+
+.card {
+  background: var(--color-white);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-xl);
+  padding: var(--spacing-8);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 上部のゴールドライン装飾 */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: var(--gradient-gold);
+}
+
+.header {
+  margin-bottom: var(--spacing-8);
+}
+
+.label {
+  display: block;
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.2em;
+  color: var(--color-gray-500);
+  margin-bottom: var(--spacing-2);
+  font-weight: 700;
+}
+
+.deviationValue {
+  font-size: 6rem;
+  font-weight: 800;
+  line-height: 1;
+  background: var(--gradient-navy);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--spacing-4);
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.05em;
+}
+
+.rankBadge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-6);
+  background: var(--color-navy);
+  color: var(--color-gold);
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+}
+
+.rankChar {
+  font-size: var(--font-size-xl);
+  line-height: 1;
+}
+
+.commentBox {
+  margin-bottom: var(--spacing-8);
+  padding: var(--spacing-4);
+  background: var(--color-gray-50);
+  border-radius: var(--radius-lg);
+}
+
+.comment {
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--color-gray-800);
+  font-weight: 500;
+}
+
+.scoreDetails {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-8);
+  padding: var(--spacing-4);
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+}
+
+.scoreItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.total {
+  border-left: 1px solid var(--color-gray-200);
+  padding-left: var(--spacing-2);
+}
+
+.total .scoreValue {
+  color: var(--color-navy);
+  font-weight: 800;
+}
+
+.scoreLabel {
+  font-size: var(--font-size-xs);
+  color: var(--color-gray-500);
+}
+
+.scoreValue {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--color-gray-700);
+}
+
+.invitationAlert {
+  cursor: pointer;
+  background: var(--gradient-gold);
+  padding: var(--spacing-4);
+  border-radius: var(--radius-lg);
+  color: var(--color-navy);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-8);
+  text-align: left;
+  box-shadow: var(--shadow-gold);
+  transition: transform var(--transition-base);
+}
+
+.invitationAlert:hover {
+  transform: translateY(-2px);
+}
+
+.invitationIcon {
+  font-size: var(--font-size-2xl);
+  background: rgba(255, 255, 255, 0.2);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+}
+
+.invitationSub {
+  font-size: var(--font-size-xs);
+  opacity: 0.8;
+}
+
+.actions {
+  margin-top: var(--spacing-6);
+}
+
+.retryLink {
+  font-size: var(--font-size-sm);
+  color: var(--color-gray-500);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.retryLink:hover {
+  color: var(--color-navy);
+}
+
+.loadingContainer, .errorContainer {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-4);
+}
+
+@media (max-width: 480px) {
+  .deviationValue {
+    font-size: 4.5rem;
+  }
+  
+  .card {
+    padding: var(--spacing-6);
+  }
+}
