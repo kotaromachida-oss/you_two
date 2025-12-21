@@ -13,8 +13,40 @@ import { useState } from 'react';
 
 export default function ResultModal({ deviation, userAgeGroup }: { deviation: DeviationValueRange; userAgeGroup: string }) {
   const [ isOpen, setOpen ] = useState(true);
+  const [ email, setEmail ] = useState('');
+  const [ isSending, setIsSending ] = useState(false);
+  const [ isSuccess, setIsSuccess ] = useState(false);
+  const [ error, setError ] = useState<string | null>(null);
 
   const ageLabel = AGE_GROUP_OPTIONS.find(option => option.value === userAgeGroup)?.label;
+
+  const handleSendInvitation = async () => {
+    if (!email) return;
+    
+    setIsSending(true);
+    setError(null);
+    
+    try {
+      const response = await fetch('/api/send-invitation', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || '送信に失敗しました');
+      }
+
+      setIsSuccess(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : '送信に失敗しました');
+    } finally {
+      setIsSending(false);
+    }
+  };
 
   return (
     <Modal isOpen={isOpen} onClose={() => setOpen(false)}>
@@ -38,13 +70,35 @@ export default function ResultModal({ deviation, userAgeGroup }: { deviation: De
           <p><strong>You two会員クラブ</strong>への招待状をお送りします</p>
         </div>
 
-        <div className={styles.formWrapper}>
-          <FormWrapper className={styles.formInner}>
-            <FormLabel htmlFor="invitationEmail">メールアドレス</FormLabel>
-            <TextField type="email" id="invitationEmail" prefixIcon={<IconEmail size={24} />} placeholder="メールアドレス" />
-          </FormWrapper>
-          <Button variant="primary">招待を受け取る</Button>
-        </div>
+        {isSuccess ? (
+          <div className={styles.successMessage}>
+            <p>招待状を送信しました。メールをご確認ください。</p>
+            <Button variant="secondary" onClick={() => setOpen(false)} className="mt-4">閉じる</Button>
+          </div>
+        ) : (
+          <div className={styles.formWrapper}>
+            <FormWrapper className={styles.formInner}>
+              <FormLabel htmlFor="invitationEmail">メールアドレス</FormLabel>
+              <TextField 
+                type="email" 
+                id="invitationEmail" 
+                prefixIcon={<IconEmail size={24} />} 
+                placeholder="メールアドレス" 
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={isSending}
+              />
+            </FormWrapper>
+            {error && <p className={styles.errorText}>{error}</p>}
+            <Button 
+              variant="primary" 
+              onClick={handleSendInvitation} 
+              disabled={isSending || !email}
+            >
+              {isSending ? '送信中...' : '招待を受け取る'}
+            </Button>
+          </div>
+        )}
 
       </div>
     </Modal>

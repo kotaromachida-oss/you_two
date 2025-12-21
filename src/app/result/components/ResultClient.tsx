@@ -1,4 +1,5 @@
 'use client';
+import { useEffect, useState } from 'react';
 
 import Card from '@/components/Card';
 import Link from 'next/link';
@@ -12,8 +13,13 @@ import { getRankInfo } from '@/lib/scoring-engine';
 
 
 export default function ResultClient({ decodedData }: { decodedData: { userAgeGroup: string; totalScore: number } }) {
-
   const router = useRouter();
+  const [currentUrl, setCurrentUrl] = useState('');
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setCurrentUrl(window.location.href);
+  }, []);
   const deviation = getRankInfo(decodedData.totalScore);
   if (!deviation) {
     router.replace('/');
@@ -40,7 +46,12 @@ export default function ResultClient({ decodedData }: { decodedData: { userAgeGr
               <div style={{textAlign: 'center'}}>
                 <span className={styles.gaugeScore}>あなた</span>
               </div>
-              <ul className={styles.guageGradations}>
+              <ul 
+                className={styles.guageGradations}
+                style={{
+                  transform: `translateX(calc(50% - ${((deviation.deviation - 10) / 5) * (40 + 22) + 20}px))`
+                }}
+              >
                 <li>10</li>
                 <li>15</li>
                 <li>20</li>
@@ -81,7 +92,12 @@ export default function ResultClient({ decodedData }: { decodedData: { userAgeGr
           </div>
 
           <div className={styles.shareButtonWrapper}>
-            <button className={styles.shareButton}>
+            <Link 
+              href={`https://x.com/share?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(`あなたのパワーカップル偏差値は${deviation.deviation}です。`)}`} 
+              rel="nofollow" 
+              target="_blank" 
+              className={styles.shareButton}
+            >
               <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_76_71)">
                   <path d="M9.52217 6.92379L15.4785 0H14.0671L8.89516 6.01183L4.76437 0H0L6.24656 9.09095L0 16.3516H1.41155L6.87321 10.0029L11.2356 16.3516H16L9.52183 6.92379H9.52217ZM7.58887 9.17104L6.95596 8.26579L1.92015 1.06259H4.0882L8.15216 6.8758L8.78507 7.78105L14.0677 15.3373H11.8997L7.58887 9.17139V9.17104Z" fill="white"/>
@@ -93,7 +109,7 @@ export default function ResultClient({ decodedData }: { decodedData: { userAgeGr
                 </defs>
               </svg>
               <span>シェアする</span>
-            </button>
+            </Link>
             <Link href="/">
               <Button variant="secondary">もう一度診断する</Button>
             </Link>

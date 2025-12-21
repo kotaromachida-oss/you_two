@@ -1,47 +1,45 @@
 import { NextResponse } from 'next/server';
-import { Resend } from 'resend';
-import InvitationEmail from '@/emails/invitation-email';
-
-// ビルド時のエラー回避のため、APIキーがない場合はダミーを使用
-const resend = new Resend(process.env.RESEND_API_KEY || 're_dummy');
 
 export async function POST(request: Request) {
   try {
-    const { email, type } = await request.json();
+    const { email } = await request.json();
 
-    if (!email || !type) {
+    if (!email) {
       return NextResponse.json(
-        { error: 'Email and type are required' },
+        { error: 'Email is required' },
         { status: 400 }
       );
     }
 
-    // キャンペーン期間の判定（未設定の場合はfalse）
-    const campaignStart = process.env.NEXT_PUBLIC_CAMPAIGN_START;
-    const campaignEnd = process.env.NEXT_PUBLIC_CAMPAIGN_END;
-    const now = new Date();
-    const isCampaignActive = !!(
-      campaignStart && 
-      campaignEnd && 
-      now >= new Date(campaignStart) && 
-      now <= new Date(campaignEnd)
-    );
+    const gasUrl = process.env.SEND_INVITATION_GAS_URL;
 
-    const { data, error } = await resend.emails.send({
-      from: 'You two <onboarding@resend.dev>', // 注意: 商用環境ではドメイン認証が必要
-      to: email,
-      subject: type === 'confirmed' 
-        ? '【You two】会員クラブへのご招待' 
-        : '【You two】特別なご案内',
-      react: InvitationEmail({ type, isCampaignActive }),
-    });
-
-    if (error) {
-      console.error('Email send error:', error);
-      return NextResponse.json({ error: error.message }, { status: 400 });
+    if (!gasUrl) {
+      console.error('SEND_INVITATION_GAS_URL is not defined');
+      return NextResponse.json(
+        { error: 'API configuration error' },
+        { status: 500 }
+      );
     }
 
-    return NextResponse.json({ success: true, data });
+    // GAS APIへリクエストを転送
+    const response = await fetch(gasUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('GAS API error:', errorText);
+      return NextResponse.json(
+        { error: 'Failed to send invitation via GAS' },
+        { status: response.status }
+      );
+    }
+
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error('Server error:', error);
     return NextResponse.json(
