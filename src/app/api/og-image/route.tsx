@@ -89,13 +89,18 @@ export async function GET(request: Request) {
 
     // データをデコード
     const result = decodeResultFromUrl(data);
-    const deviation = getRankInfo(result.totalScore);
-
-    const ageLabel = AGE_GROUP_OPTIONS.find(option => option.value === result.userAgeGroup)?.label;
     
     // デコード失敗時
-    if (!deviation) {
+    if (!result) {
       return new Response('Invalid data', { status: 400 });
+    }
+
+    const deviation = getRankInfo(result.totalScore);
+    const ageLabel = AGE_GROUP_OPTIONS.find(option => option.value === result.userAgeGroup)?.label;
+    
+    // ランク情報取得失敗時
+    if (!deviation) {
+      return new Response('Rank info not found', { status: 400 });
     }
     
 
@@ -212,6 +217,7 @@ export async function GET(request: Request) {
         ],
       }
     );
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {
     return new Response(`Failed to generate image: ${e.message}`, { status: 500 });
   }

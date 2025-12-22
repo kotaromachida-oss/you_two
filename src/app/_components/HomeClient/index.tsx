@@ -5,7 +5,6 @@ import TopContent from "../Top";
 import UserContent from "../User";
 import PartnerContent from "../Partner";
 import { UserInput } from "@/lib/scoring-tables";
-import { calculateScore } from "@/lib/scoring-engine";
 import { useRouter } from "next/navigation";
 import { encodeResultToUrl } from "@/lib/scoring-encoder";
 
@@ -49,6 +48,8 @@ export default function HomeClient() {
   }, []);
 
   const handleResult = useCallback(() => {
+    if (!userInput.ageGroup) return; // ageGroup is required for encodeResultToUrl
+
     const encoded = encodeResultToUrl({
       user: userInput,
       partner: partnerInput,
