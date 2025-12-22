@@ -41,6 +41,7 @@ export default function ResultModal({ deviation, userAgeGroup }: { deviation: De
       }
 
       setIsSuccess(true);
+      setOpen(false);
     } catch (err) {
       setError(err instanceof Error ? err.message : '送信に失敗しました');
     } finally {
@@ -70,35 +71,30 @@ export default function ResultModal({ deviation, userAgeGroup }: { deviation: De
           <p><strong>You two会員クラブ</strong>への招待状をお送りします</p>
         </div>
 
-        {isSuccess ? (
-          <div className={styles.successMessage}>
-            <p>招待状を送信しました。メールをご確認ください。</p>
-            <Button variant="secondary" onClick={() => setOpen(false)} className="mt-4">閉じる</Button>
-          </div>
-        ) : (
-          <div className={styles.formWrapper}>
-            <FormWrapper className={styles.formInner}>
-              <FormLabel htmlFor="invitationEmail">メールアドレス</FormLabel>
-              <TextField 
-                type="email" 
-                id="invitationEmail" 
-                prefixIcon={<IconEmail size={24} />} 
-                placeholder="メールアドレス" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                disabled={isSending}
-              />
-            </FormWrapper>
-            {error && <p className={styles.errorText}>{error}</p>}
-            <Button 
-              variant="primary" 
-              onClick={handleSendInvitation} 
-              disabled={isSending || !email}
-            >
-              {isSending ? '送信中...' : '招待を受け取る'}
-            </Button>
-          </div>
-        )}
+        <div className={styles.formWrapper}>
+          <FormWrapper className={styles.formInner}>
+            <FormLabel htmlFor="invitationEmail">メールアドレス</FormLabel>
+            <TextField 
+              type="email" 
+              id="invitationEmail" 
+              prefixIcon={<IconEmail size={24} />} 
+              placeholder="メールアドレス" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              disabled={isSending}
+            />
+          </FormWrapper>
+          {error && <p className={styles.errorText}>{error}</p>}
+          <Button 
+            variant="primary" 
+            onClick={handleSendInvitation} 
+            disabled={isSending || !email}
+          >
+            {isSending ? '送信中...'
+            : isSuccess ? '送信済み'
+            : '招待を受け取る'}
+          </Button>
+        </div>
 
       </div>
     </Modal>
