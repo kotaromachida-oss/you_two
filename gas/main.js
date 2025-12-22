@@ -28,9 +28,14 @@ https://youtwo.jp/application
 
 
 function doPost(e) {
-  // const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("フォームの回答 1");
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("招待メール管理リスト");
   const data = JSON.parse(e.postData.contents);
   sheet.appendRow([
+    data.email,
+  ]);
+
+  sheet.appendRow([
+    new Date(),
     data.email,
   ]);
 
