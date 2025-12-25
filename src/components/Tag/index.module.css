@@ -8,6 +8,10 @@
   font-size: var(--font-size-sm);
   font-weight: 700;
   line-height: 22px;
+
+  @media screen and (max-width: 768px) {
+    font-size: var(--font-size-xs);
+  }
 }
 
 

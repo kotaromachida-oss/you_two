@@ -68,7 +68,7 @@ export default function ResultModal({ deviation, userAgeGroup }: { deviation: De
           
           <p><b>おめでとうございます！</b></p>
           <p><small>あなたは{deviation.certification}です。</small></p>
-          <p><strong>You two会員クラブ</strong>への招待状をお送りします</p>
+          <p className={styles.messageInvitation}><strong>審査制パワーカップルサービスYou two</strong>への<br />招待状をお送りします</p>
         </div>
 
         <div className={styles.formWrapper}>

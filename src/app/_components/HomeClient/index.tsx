@@ -38,6 +38,7 @@ export default function HomeClient() {
     const handleHashChange = () => {
       console.log(window.location.hash);
       setHash(window.location.hash);
+      window.scrollTo(0, 0);
     };
     
     window.addEventListener('hashchange', handleHashChange);

@@ -13,7 +13,7 @@ export function encodeResultToUrl(result: DiagnosticInput): string {
 
   const data = {
     ua: result.user.ageGroup,
-    ts: totalScore,
+    ts: Math.round(totalScore),
   };
   
   const jsonString = JSON.stringify(data);

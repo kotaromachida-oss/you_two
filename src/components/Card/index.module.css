@@ -5,4 +5,8 @@
   padding: var(--spacing-10);
   border-radius: var(--radius-xl);
   background-color: var(--color-layer-1);
+
+  @media screen and (max-width: 768px) {
+    padding: var(--spacing-6);
+  }
 }

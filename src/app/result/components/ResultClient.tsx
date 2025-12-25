@@ -20,9 +20,19 @@ export default function ResultClient({ decodedData }: { decodedData: { userAgeGr
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setCurrentUrl(window.location.href);
   }, []);
+
+  console.log(decodedData);
+
   const deviation = getRankInfo(decodedData.totalScore);
+  console.log(deviation);
+
+  // useEffect(() => {
+  //   if (!deviation) {
+  //     router.replace('/');
+  //   }
+  // }, [deviation, router]);
+
   if (!deviation) {
-    router.replace('/');
     return <></>;
   }
 

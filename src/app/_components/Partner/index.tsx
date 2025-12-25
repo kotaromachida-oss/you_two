@@ -63,13 +63,12 @@ export default function PartnerContent({ value, onChange, onResult }: PartnerCon
         <FormWrapper>
           <FormLabel htmlFor="">所属企業の社員数</FormLabel>
           <Select name="partnerCompanySize" id="partnerCompanySize" value={value.companySize} onChange={handleChangeCompanySize}>
-            <option value="" disabled selected={!value.companySize}>-</option>
+            <option value="">-</option>
             {
               COMPANY_SIZE_COEFFICIENTS.map((item) => (
                 <option
                   key={item.value}
                   value={item.value}
-                  selected={value.companySize === item.value}
                 >
                   {item.label}
                 </option>
@@ -81,13 +80,12 @@ export default function PartnerContent({ value, onChange, onResult }: PartnerCon
         <FormWrapper>
           <FormLabel htmlFor="">役職</FormLabel>
           <Select name="partnerPosition" id="partnerPosition" value={value.position} onChange={handleChangePosition}>
-            <option value="" disabled selected={!value.position}>-</option>
+            <option value="">-</option>
             {
               POSITION_COEFFICIENTS.map((item) => (
                 <option
                   key={item.value}
                   value={item.value}
-                  selected={value.position === item.value}
                 >
                   {item.label}
                 </option>
@@ -99,13 +97,12 @@ export default function PartnerContent({ value, onChange, onResult }: PartnerCon
         <FormWrapper>
           <FormLabel htmlFor="">年収</FormLabel>
           <Select name="partnerIncome" id="partnerIncome" value={value.annualIncome} onChange={handleChangeAnnualIncome}>
-            <option value="" disabled selected={!value.annualIncome}>-</option>
+            <option value="">-</option>
             {
               INCOME_GROUP_OPTIONS.map((item) => (
                 <option
                   key={item.value}
                   value={item.value}
-                  selected={value.annualIncome === item.value}
                 >
                   {item.label}
                 </option>

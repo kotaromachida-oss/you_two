@@ -116,6 +116,10 @@
   line-height: 1.6em;
 }
 
+.messageInvitation {
+  text-align: center;
+}
+
 
 .iconContainer {
   display: inline-flex;
