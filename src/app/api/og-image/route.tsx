@@ -163,15 +163,26 @@ export async function GET(request: Request) {
               >{deviation.deviation}</div>
             </div>
 
-            <div style={{
-              display: 'flex',
-              gap: '8px',
-              justifyContent: 'center',
-              alignItems: 'center',
-              margin: '8px 0',
-            }}>
-              {ageLabel && <div style={{ display: 'flex', padding: '8px 16px', borderRadius: '24px', border: '1px solid #B3BEC6', color: '#B3BEC6', fontSize: '14px', fontWeight: 700, lineHeight: '24px' }} >{ageLabel}の評価</div>}
-            </div>
+            {
+              deviation.rank && (
+                <p style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#A89B57',
+                  fontFamily: 'Noto Serif JP',
+                  fontSize: '24px',
+                  fontWeight: 700,
+                  lineHeight: '1.6',
+                  margin: '8px 0',
+                  textAlign: 'center',
+                }}>
+                  <span style={{ display: 'flex', width: '2rem', height: '1px', margin: '1em', backgroundColor: '#A89B57', alignItems: 'center', justifyContent: 'center', letterSpacing: '0.1em'}}></span>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', letterSpacing: '0.1em'}}>上位<span style={{ fontSize: '36px', letterSpacing: '0' }}>{deviation.rank}</span>%</div>
+                  <span style={{ display: 'flex', width: '2rem', height: '1px', margin: '1em', backgroundColor: '#A89B57', alignItems: 'center', justifyContent: 'center', letterSpacing: '0.1em'}}></span>
+                </p>
+              )
+            }
 
             <div style={{
               display: 'flex',
@@ -185,9 +196,10 @@ export async function GET(request: Request) {
                 deviation.certification && <div style={{ display: 'flex', fontWeight: 700 }}>おめでとうございます！</div>
               }
               {
-                deviation.certification && <div style={{ display: 'flex', fontSize: '14px' }}>あなたは{deviation.certification}です。</div>
+                deviation.certification && <div style={{ display: 'flex',  fontSize: '24px', fontWeight: 700}}>あなたは{deviation.certification}です。</div>
               }
-              <div style={{ display: 'flex', textAlign: 'center' }}>{deviation.comment}</div>
+              <div style={{ margin: '16px auto', width: '32px', height: '2px', backgroundColor: '#433E23' }}></div>
+              <div style={{ display: 'flex', fontSize: '18px', textAlign: 'center', whiteSpace: 'pre-wrap' }}>{deviation.comment}</div>
             </div>
           </div>
         </div>

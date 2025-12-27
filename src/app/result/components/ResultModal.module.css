@@ -111,7 +111,6 @@
   flex-direction: column;
   gap: var(--spacing-2);
   align-items: center;
-  margin: 0 0 var(--spacing-6);
   font-size: 1rem;
   line-height: 1.6em;
 }
@@ -120,6 +119,12 @@
   text-align: center;
 }
 
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: var(--spacing-6) 0;
+}
 
 .iconContainer {
   display: inline-flex;
@@ -241,8 +246,10 @@
 }
 
 .commentBlock {
+  font-size: var(--font-size-lg);
   margin: var(--spacing-10) 0;
   text-align: center;
+  white-space: pre-wrap;
 }
 
 .shareButtonWrapper {
@@ -261,4 +268,54 @@
   color: var(--color-monochrome-white);
   font-size: var(--font-size-lg);
   font-weight: 700;
+}
+
+.rank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: var(--spacing-2) 0;
+  font-family: var(--font-family-title);
+  color: var(--color-brand-primary);
+  font-size: var(--font-size-2xl);
+  letter-spacing: 0.1em;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 2em;
+    height: 1px;
+    margin: 0 var(--spacing-2);
+    background-color: var(--color-brand-primary);
+  }
+
+  &::after {
+    content: '';
+    display: inline-block;
+    width: 2em;
+    height: 1px;
+    margin: 0 var(--spacing-2);
+    background-color: var(--color-brand-primary);
+  }
+}
+
+.rankNumber {
+  font-size: var(--font-size-4xl);
+  font-weight: 700;
+  letter-spacing: 0em;
+}
+
+.certification {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  text-align: center;
+
+  &::after {
+    content: "";
+    background-color: var(--color-brand-secondary);
+    width: 32px;
+    height: 2px;
+    margin: var(--spacing-4) auto;
+    display: block;
+  }
 }

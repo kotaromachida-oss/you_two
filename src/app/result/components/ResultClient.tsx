@@ -46,56 +46,15 @@ export default function ResultClient({ decodedData }: { decodedData: { userAgeGr
             <h2 className={styles.deviationValue}>{deviation.deviation}</h2>
           </div>
 
-          <div className={styles.tagGroup}>
-            <Tag size="sm">20代後半の評価</Tag>
-          </div>
+          {
+            deviation.rank && (
+              <p className={styles.rank}>
+                上位<span className={styles.rankNumber}>{deviation.rank}</span>%
+              </p>
+            )
+          }
 
-          <div className={styles.gaugeBlock}>
-            <p className={styles.guageTitle}>全体の中でのあなたの位置</p>
-            <div className={styles.guageContent}>
-              <div style={{textAlign: 'center'}}>
-                <span className={styles.gaugeScore}>あなた</span>
-              </div>
-              <ul 
-                className={styles.guageGradations}
-                style={{
-                  transform: `translateX(calc(50% - ${((deviation.deviation - 10) / 5) * (40 + 22) + 20}px))`
-                }}
-              >
-                <li>10</li>
-                <li>15</li>
-                <li>20</li>
-                <li>25</li>
-                <li>30</li>
-                <li>35</li>
-                <li>40</li>
-                <li>45</li>
-                <li>50</li>
-                <li>55</li>
-                <li>60</li>
-                <li>65</li>
-                <li>70</li>
-                <li>75</li>
-                <li>80</li>
-                <li>85</li>
-                <li>90</li>
-                <li>95</li>
-                <li>100</li>
-                <li>105</li>
-                <li>110</li>
-                <li>115</li>
-                <li>120</li>
-                <li>125</li>
-                <li>130</li>
-                <li>135</li>
-                <li>140</li>
-                <li>145</li>
-                <li>150</li>
-                <li>155</li>
-                <li>160</li>
-              </ul>
-            </div>
-          </div>
+          <p className={styles.certification}>{deviation.certification}</p>
 
           <div className={styles.commentBlock}>
             <p>{deviation.comment}</p>

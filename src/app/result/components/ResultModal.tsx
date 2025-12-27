@@ -57,18 +57,24 @@ export default function ResultModal({ deviation, userAgeGroup }: { deviation: De
           <h2 className={styles.deviationValue}>{deviation.deviation}</h2>
         </div>
 
-        <div className={styles.tagGroup}>
-          {ageLabel && <Tag size="md">{ageLabel}の評価</Tag>}
-        </div>
+        {
+          deviation.rank && (
+            <p className={styles.rank}>
+              上位<span className={styles.rankNumber}>{deviation.rank}</span>%
+            </p>
+          )
+        }
 
         <div className={styles.messageBlock}>
+          <p><b>おめでとうございます！</b></p>
+          <p className={styles.certification}>あなたは{deviation.certification}です。</p>
+          <p className={styles.messageInvitation}><strong>審査制パワーカップルサービス<a href="https://youtwo.jp/" target="_blank">You two</a></strong>への<br />招待状をお送りします</p>
+        </div>
+
+        <div className={styles.iconWrapper}>
           <span className={styles.iconContainer}>
             <IconEmail size={24} />
           </span>
-          
-          <p><b>おめでとうございます！</b></p>
-          <p><small>あなたは{deviation.certification}です。</small></p>
-          <p className={styles.messageInvitation}><strong>審査制パワーカップルサービスYou two</strong>への<br />招待状をお送りします</p>
         </div>
 
         <div className={styles.formWrapper}>

@@ -14,7 +14,7 @@ export default function TopContent() {
           あなたとパートナーの<br />&quot;<span className={styles.accent}>実力</span>&quot;を<br />偏差値で可視化
         </Heading>
 
-        <p>簡単な情報を入力するだけで、<br />お二人の総合的な実力を数値化。<br />客観的な視点から診断します。</p>
+        <p style={{ fontSize: '1.125rem', textAlign: 'center' }}>簡単な情報を入力するだけで、<br />お二人の総合的な実力を数値化。<br />客観的な視点から診断します。</p>
 
         <div className={styles.tags}>
           <Tag size="sm">即時診断</Tag>
