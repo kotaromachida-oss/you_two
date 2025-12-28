@@ -5,12 +5,13 @@ import TopContent from "../Top";
 import UserContent from "../User";
 import PartnerContent from "../Partner";
 import { UserInput } from "@/lib/scoring-tables";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { encodeResultToUrl } from "@/lib/scoring-encoder";
 
 export default function HomeClient() {
 
   const router = useRouter();
+  const pathname = usePathname();
 
   const [userInput, setUserInput] = useState<UserInput>({
     companySize: undefined,
@@ -39,6 +40,12 @@ export default function HomeClient() {
       console.log(window.location.hash);
       setHash(window.location.hash);
       window.scrollTo(0, 0);
+
+      if (typeof window !== 'undefined') {
+        if (pathname === '' && hash === '') {
+          sessionStorage.setItem('diagnostic_result', 'false');
+        }
+      }
     };
     
     window.addEventListener('hashchange', handleHashChange);
@@ -56,6 +63,9 @@ export default function HomeClient() {
       partner: partnerInput,
     });
 
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('diagnostic_result', 'true');
+    }
     router.push(`/result?data=${encoded}`);
   }, [router, userInput, partnerInput]);
 
