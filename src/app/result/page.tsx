@@ -30,7 +30,8 @@ export async function generateMetadata(
     };
   }
 
-  const ogImageUrl = `/api/og-image?data=${params.data}`;
+  const baseUrl = process.env.NEXT_PUBLIC_LP_URL || 'http://localhost:3000';
+  const ogImageUrl = `${baseUrl}api/og-image?deviation=${deviation.deviation}&rank=${deviation.rank}&certification=${encodeURIComponent(deviation.certification)}&comment=${encodeURIComponent(deviation.comment)}`;
 
   return {
     title: `偏差値${deviation.deviation} | パワーカップル診断`,
