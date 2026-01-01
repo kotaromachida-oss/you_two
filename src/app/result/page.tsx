@@ -30,7 +30,7 @@ export async function generateMetadata(
     };
   }
 
-  const baseUrl = process.env.NEXT_PUBLIC_LP_URL || 'http://localhost:3000';
+  const baseUrl = 'https://you-two-ten.vercel.app/'// || 'http://localhost:3000';
   const ogImageUrl = `${baseUrl}api/og-image?deviation=${deviation.deviation}&rank=${deviation.rank}&certification=${encodeURIComponent(deviation.certification)}&comment=${encodeURIComponent(deviation.comment)}`;
 
   return {
