@@ -31,7 +31,7 @@ export async function generateMetadata(
   }
 
   const baseUrl = 'https://you-two-ten.vercel.app/'// || 'http://localhost:3000';
-  const ogImageUrl = `${baseUrl}api/og-image?deviation=${deviation.deviation}&rank=${deviation.rank}&certification=${encodeURIComponent(deviation.certification)}&comment=${encodeURIComponent(deviation.comment)}`;
+  const ogImageUrl = `${baseUrl}api/og-image?data=${params.data}`;
 
   return {
     title: `偏差値${deviation.deviation} | パワーカップル診断`,

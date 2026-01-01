@@ -1,6 +1,27 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
+import { Inter, Noto_Sans_JP, Noto_Serif_JP } from 'next/font/google';
 import "./globals.css";
 import "../styles/animations.css";
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const notoSansJP = Noto_Sans_JP({
+  subsets: ['latin'],
+  variable: '--font-noto-sans-jp',
+  weight: ['400', '500', '700', '900'],
+  display: 'swap',
+});
+
+const notoSerifJP = Noto_Serif_JP({
+  subsets: ['latin'],
+  variable: '--font-noto-serif-jp',
+  weight: ['400', '700'],
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   title: "パワーカップル診断 | You two",
@@ -18,15 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="ja" className={`${inter.variable} ${notoSansJP.variable} ${notoSerifJP.variable}`}>
       <body>
         <div className="container">
           {children}

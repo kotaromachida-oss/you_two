@@ -19,6 +19,8 @@ export async function GET(request: Request) {
       fetch('https://fonts.gstatic.com/s/notoserifjp/v32/xn71YHs72GKoTvER4Gn3b5eMRtWGkp6o7MjQ2bzWPebA.ttf')
         .then((res) => res.arrayBuffer()),
     ]);
+
+    console.log(data)
     
     // データがない場合はデフォルト画像
     if (!data) {
